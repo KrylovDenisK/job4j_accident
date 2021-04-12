@@ -32,13 +32,20 @@
     <table class="table" id="table">
         <thead>
         <tr>
+            <th>ID</th>
             <th>Name</th>
+            <th>Text</th>
+            <th>Address</th>
+
         </tr>
         </thead>
         <tbody>
-        <c:forEach var="user" items="${users}">
+        <c:forEach var="accident" items="${accidents}">
             <tr>
-                <th>${user}</th>
+                <th>${accident.id}</th>
+                <th>${accident.name}</th>
+                <th>${accident.text}</th>
+                <th>${accident.address}</th>
             </tr>
         </c:forEach>
         </tbody>
