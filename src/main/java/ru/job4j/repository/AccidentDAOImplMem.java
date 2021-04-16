@@ -12,9 +12,9 @@ public class AccidentDAOImplMem implements StoreDAO<Accident> {
 
     public AccidentDAOImplMem() {
         this.store = new HashMap<>();
-        store.put(1, new Accident(1, "Name1", "text1", "address1"));
-        store.put(2, new Accident(1, "Name2", "text2", "address2"));
-        store.put(3, new Accident(1, "Name3", "text3", "address3"));
+        store.put(1, new Accident("Имя1", "text1", "address1"));
+        store.put(2, new Accident("Имя3", "text2", "address2"));
+        store.put(3, new Accident("Имя2", "text3", "address3"));
         this.counter = 3;
     }
 

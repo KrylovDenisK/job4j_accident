@@ -50,6 +50,8 @@
         </c:forEach>
         </tbody>
     </table>
+    <br>
+    <a href="<c:url value="/create"/>">Добавить инцидент</a>
 </div>
 </body>
 </html>
