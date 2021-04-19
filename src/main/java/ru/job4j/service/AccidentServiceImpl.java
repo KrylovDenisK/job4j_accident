@@ -14,12 +14,17 @@ public class AccidentServiceImpl implements Service<Accident> {
     }
 
     @Override
-    public Accident create(Accident entity) {
-        return store.create(entity);
+    public Accident save(Accident entity) {
+        return store.save(entity);
     }
 
     @Override
     public List<Accident> getAll() {
         return store.getAll();
+    }
+
+    @Override
+    public Accident getById(int id) {
+        return store.getById(id);
     }
 }

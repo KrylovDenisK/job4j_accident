@@ -9,6 +9,7 @@ public class Accident {
     private String address;
 
     public Accident(String name, String text, String address) {
+        this.id = 0;
         this.name = name;
         this.text = text;
         this.address = address;
@@ -18,7 +19,7 @@ public class Accident {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -51,13 +52,12 @@ public class Accident {
         if (this == o) {
             return true;
         }
-
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
         Accident accident = (Accident) o;
-        return id == accident.id &&
-                Objects.equals(name, accident.name)
+        return Objects.equals(id, accident.id)
+                && Objects.equals(name, accident.name)
                 && Objects.equals(text, accident.text)
                 && Objects.equals(address, accident.address);
     }

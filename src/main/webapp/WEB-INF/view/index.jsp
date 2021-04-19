@@ -42,7 +42,7 @@
         <tbody>
         <c:forEach var="accident" items="${accidents}">
             <tr>
-                <th>${accident.id}</th>
+                <th><a href="<c:url value="/update?id=${accident.id}"/>">${accident.id}</a></th>
                 <th>${accident.name}</th>
                 <th>${accident.text}</th>
                 <th>${accident.address}</th>
