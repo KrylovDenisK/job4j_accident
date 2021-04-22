@@ -33,6 +33,14 @@
                         </c:forEach>
                     </select>
                 </div>
+                <div class="form-group">
+                    <label for="rIds" class="control-label">Rules:</label>
+                    <select name="rIds" id="rIds" class="form-control" multiple>
+                        <c:forEach var="rule" items="${rules}">
+                            <option value="${rule.id}">${rule.name}</option>
+                        </c:forEach>
+                    </select>
+                </div>
 
                 <div class="form-group">
                     <label for="text" class="col-xs-2 control-label">Desription:</label>

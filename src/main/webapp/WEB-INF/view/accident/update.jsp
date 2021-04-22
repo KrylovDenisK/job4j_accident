@@ -24,30 +24,46 @@
                 <label for="name" class="control-label">Name:</label>
                 <input type="text" class="form-control" id="name" name="name" value="${accident.name}" placeholder="Enter name">
             </div>
-                <div class="form-group">
-                    <label for="type.id" class="control-label">Type:</label>
-                    <select name="type.id" id="type.id" class="form-control">
-                        <c:forEach var="type" items="${types}" >
-                            <c:if test="${type.equals(accident.type)}">
-                                <option selected value="${type.id}">${type.name}</option>
-                            </c:if>
-                            <c:if test="${!type.equals(accident.type)}">
-                                <option value="${type.id}">${type.name}</option>
-                            </c:if>
-                        </c:forEach>
-                    </select>
-                <div class="form-group">
-                    <label for="text" class="col-xs-2 control-label">Desription:</label>
-                    <input type="text" class="form-control" id="text" name="text" value="${accident.text}" placeholder="Enter description">
-                </div>
-                <div class="form-group">
-                    <label for="address" class="col-xs-2 control-label">Address:</label>
-                    <input type="text" class="form-control" id="address" name="address" value="${accident.address}" placeholder="Enter address">
-                </div>
+
+            <div class="form-group">
+                <label for="type.id" class="control-label">Type:</label>
+                <select name="type.id" id="type.id" class="form-control">
+                    <c:forEach var="type" items="${types}" >
+                        <c:if test="${type.equals(accident.type)}">
+                            <option selected value="${type.id}">${type.name}</option>
+                        </c:if>
+                        <c:if test="${!type.equals(accident.type)}">
+                            <option value="${type.id}">${type.name}</option>
+                        </c:if>
+                    </c:forEach>
+                </select>
             </div>
-                <div class="form-group" align="center">
-                    <button type="submit" class="btn btn-success">UPDATE</button>
-                </div>
+
+            <div class="form-group">
+                <label for="rIds" class="control-label">Rules:</label>
+                <select name="rIds" id="rIds" class="form-control" multiple>
+                    <c:forEach var="rule" items="${rules}" >
+                        <c:if test="${accident.rules.contains(rule)}">
+                            <option selected value="${rule.id}">${rule.name}</option>
+                        </c:if>
+                        <c:if test="${!accident.rules.contains(rule)}">
+                            <option value="${rule.id}">${rule.name}</option>
+                        </c:if>
+                    </c:forEach>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="text" class="col-xs-2 control-label">Desription:</label>
+                <input type="text" class="form-control" id="text" name="text" value="${accident.text}" placeholder="Enter description">
+            </div>
+            <div class="form-group">
+                <label for="address" class="col-xs-2 control-label">Address:</label>
+                <input type="text" class="form-control" id="address" name="address" value="${accident.address}" placeholder="Enter address">
+            </div>
+            <div class="form-group" align="center">
+                <button type="submit" class="btn btn-success">UPDATE</button>
+            </div>
         </div>
     </div>
     </form>
