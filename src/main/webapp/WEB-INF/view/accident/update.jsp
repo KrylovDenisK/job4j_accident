@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="ru">
 <head>
-    <title>Sign in</title>
+    <title>Update accident</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -20,10 +20,22 @@
             <h2>Update accident</h2>
         </div>
         <div class="card-body">
+            <div class="form-group">
+                <label for="name" class="control-label">Name:</label>
+                <input type="text" class="form-control" id="name" name="name" value="${accident.name}" placeholder="Enter name">
+            </div>
                 <div class="form-group">
-                    <label for="name" class="control-label">Name:</label>
-                    <input type="text" class="form-control" id="name" name="name" value="${accident.name}" placeholder="Enter name">
-                </div>
+                    <label for="type.id" class="control-label">Type:</label>
+                    <select name="type.id" id="type.id" class="form-control">
+                        <c:forEach var="type" items="${types}" >
+                            <c:if test="${type.equals(accident.type)}">
+                                <option selected value="${type.id}">${type.name}</option>
+                            </c:if>
+                            <c:if test="${!type.equals(accident.type)}">
+                                <option value="${type.id}">${type.name}</option>
+                            </c:if>
+                        </c:forEach>
+                    </select>
                 <div class="form-group">
                     <label for="text" class="col-xs-2 control-label">Desription:</label>
                     <input type="text" class="form-control" id="text" name="text" value="${accident.text}" placeholder="Enter description">
@@ -32,6 +44,7 @@
                     <label for="address" class="col-xs-2 control-label">Address:</label>
                     <input type="text" class="form-control" id="address" name="address" value="${accident.address}" placeholder="Enter address">
                 </div>
+            </div>
                 <div class="form-group" align="center">
                     <button type="submit" class="btn btn-success">UPDATE</button>
                 </div>

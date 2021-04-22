@@ -8,15 +8,15 @@ import ru.job4j.service.Service;
 
 @Controller
 public class IndexController {
-    private final Service<Accident> accidents;
+    private final Service accidents;
 
-    public IndexController(Service<Accident> accidents) {
+    public IndexController(Service accidents) {
         this.accidents = accidents;
     }
 
     @GetMapping("/")
     public String index(Model model) {
-        model.addAttribute("accidents", accidents.getAll());
+        model.addAttribute("accidents", accidents.getAccidents());
         return "index";
     }
 }

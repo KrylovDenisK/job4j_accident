@@ -2,6 +2,7 @@ package ru.job4j.repository;
 
 import org.springframework.stereotype.Repository;
 import ru.job4j.model.Accident;
+import ru.job4j.repository.StoreDAO;
 
 import java.util.*;
 
@@ -12,13 +13,7 @@ public class AccidentDAOImplMem implements StoreDAO<Accident> {
 
     public AccidentDAOImplMem() {
         this.store = new HashMap<>();
-        Accident first = new Accident("Имя1", "text1", "address1");
-        Accident second = new Accident("Имя3", "text2", "address2");
-        first.setId(1);
-        second.setId(2);
-        store.put(1, first);
-        store.put(2, second);
-        this.counter = 2;
+        this.counter = 0;
     }
 
     @Override

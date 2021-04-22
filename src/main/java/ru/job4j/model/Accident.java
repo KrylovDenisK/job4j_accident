@@ -5,12 +5,15 @@ import java.util.Objects;
 public class Accident {
     private int id;
     private String name;
+    private AccidentType type;
     private String text;
     private String address;
 
-    public Accident(String name, String text, String address) {
+
+    public Accident(String name, AccidentType type, String text, String address) {
         this.id = 0;
         this.name = name;
+        this.type = type;
         this.text = text;
         this.address = address;
     }
@@ -19,7 +22,7 @@ public class Accident {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -29,6 +32,14 @@ public class Accident {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public AccidentType getType() {
+        return type;
+    }
+
+    public void setType(AccidentType type) {
+        this.type = type;
     }
 
     public String getText() {
