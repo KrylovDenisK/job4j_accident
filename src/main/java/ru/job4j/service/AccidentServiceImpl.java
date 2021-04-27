@@ -25,7 +25,7 @@ public class AccidentServiceImpl implements Service {
 
     @Override
     public Accident save(Accident entity) {
-        return store.save(entity);
+        return store.saveOrUpdate(entity);
     }
 
     @Override
@@ -54,17 +54,19 @@ public class AccidentServiceImpl implements Service {
         return setAccidentType(withRules);
     }
 
-    public Accident setRules(Accident accident, String[] ids) {
-        accident.setRules(
-                Arrays.stream(ids)
-                        .map(Integer::parseInt)
-                        .map(x -> rules.getById(x))
-                        .collect(Collectors.toSet())
-        );
+    private Accident setRules(Accident accident, String[] ids) {
+        if (ids != null) {
+            accident.setRules(
+                    Arrays.stream(ids)
+                            .map(Integer::parseInt)
+                            .map(x -> rules.getById(x))
+                            .collect(Collectors.toSet())
+            );
+        }
         return accident;
     }
 
-    public Accident setAccidentType(Accident accident) {
+    private Accident setAccidentType(Accident accident) {
         int acTypeId = accident.getType().getId();
         accident.setType(types.getById(acTypeId));
         return accident;

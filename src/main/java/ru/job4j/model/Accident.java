@@ -4,7 +4,7 @@ import java.util.Objects;
 import java.util.Set;
 
 public class Accident {
-    private int id;
+    private int id = 0;
     private String name;
     private AccidentType type;
     private Set<Rule> rules;
@@ -12,13 +12,25 @@ public class Accident {
     private String address;
 
 
-    public Accident(String name, AccidentType type, Set<Rule> rules, String text, String address) {
-        this.id = 0;
-        this.name = name;
-        this.type = type;
-        this.rules = rules;
-        this.text = text;
-        this.address = address;
+    public Accident() {
+    }
+
+    public static Accident of(Integer id, String name, AccidentType type, Set<Rule> rules, String text, String address) {
+        Accident accident = new Accident();
+        accident.id = id;
+        accident.name = name;
+        accident.type = type;
+        accident.rules = rules;
+        accident.text = text;
+        accident.address = address;
+        return accident;
+    }
+
+    public static Accident of(Integer id, String name) {
+        Accident accident = new Accident();
+        accident.id = id;
+        accident.name = name;
+        return accident;
     }
 
     public int getId() {

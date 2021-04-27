@@ -1,15 +1,13 @@
 package ru.job4j.repository;
 
-import org.springframework.stereotype.Repository;
 import ru.job4j.model.Rule;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 
-@Repository
+//@Repository
 public class RuleDAOImplMem implements StoreDAO<Rule> {
     private Map<Integer, Rule> rules;
 
@@ -21,7 +19,7 @@ public class RuleDAOImplMem implements StoreDAO<Rule> {
     }
 
     @Override
-    public Rule save(Rule entity) {
+    public Rule saveOrUpdate(Rule entity) {
         return null;
     }
 

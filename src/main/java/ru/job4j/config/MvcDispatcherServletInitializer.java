@@ -4,7 +4,7 @@ import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 import javax.servlet.Filter;
-import javax.servlet.FilterRegistration;
+
 
 public class MvcDispatcherServletInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
     @Override
@@ -14,7 +14,7 @@ public class MvcDispatcherServletInitializer extends AbstractAnnotationConfigDis
 
     @Override
     protected Class<?>[] getServletConfigClasses() {
-        return new Class[] {ContextConfig.class};
+        return new Class[] {ContextConfig.class, JdbcConfig.class};
     }
 
     @Override

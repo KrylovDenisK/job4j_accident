@@ -21,7 +21,7 @@ public class AccidentTypeDAOImplMem implements StoreDAO<AccidentType> {
     }
 
     @Override
-    public AccidentType save(AccidentType entity) {
+    public AccidentType saveOrUpdate(AccidentType entity) {
         return null;
     }
 

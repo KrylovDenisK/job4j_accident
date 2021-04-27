@@ -6,7 +6,7 @@ import ru.job4j.repository.StoreDAO;
 
 import java.util.*;
 
-@Repository
+//@Repository
 public class AccidentDAOImplMem implements StoreDAO<Accident> {
     private Map<Integer, Accident> store;
     private Integer counter;
@@ -17,7 +17,7 @@ public class AccidentDAOImplMem implements StoreDAO<Accident> {
     }
 
     @Override
-    public Accident save(Accident accident) {
+    public Accident saveOrUpdate(Accident accident) {
         if (accident.getId() == 0) {
             counter++;
             accident.setId(counter);
