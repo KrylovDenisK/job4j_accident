@@ -29,8 +29,8 @@ public class RuleDAOImplMem implements StoreDAO<Rule> {
     }
 
     @Override
-    public Rule delete(Integer id) {
-        return null;
+    public void delete(Integer id) {
+
     }
 
     @Override

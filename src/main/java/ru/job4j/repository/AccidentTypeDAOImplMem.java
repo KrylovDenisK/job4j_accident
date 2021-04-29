@@ -31,8 +31,8 @@ public class AccidentTypeDAOImplMem implements StoreDAO<AccidentType> {
     }
 
     @Override
-    public AccidentType delete(Integer id) {
-        return null;
+    public void delete(Integer id) {
+
     }
 
     @Override

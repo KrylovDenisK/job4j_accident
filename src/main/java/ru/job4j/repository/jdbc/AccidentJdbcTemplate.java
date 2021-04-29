@@ -12,7 +12,7 @@ import java.sql.PreparedStatement;
 import java.util.HashSet;
 import java.util.List;
 
-@Repository
+//@Repository
 public class AccidentJdbcTemplate implements StoreDAO<Accident> {
     private final JdbcTemplate jdbc;
     private final RuleJdbcTemplate ruleJdbcTemplate;
@@ -71,18 +71,19 @@ public class AccidentJdbcTemplate implements StoreDAO<Accident> {
     }
     @Override
     public Accident getById(Integer id) {
-        return jdbc.queryForObject("SELECT a.id, a.name, text, address, at.id type_id, at.name type_name FROM accidents a JOIN atypes at ON a.type_id = at.id WHERE a.id = ?;",
+        return jdbc.queryForObject("SELECT a.id, a.name, text, address, at.id type_id, at.name type_name FROM accidents a " +
+                        "JOIN atypes at ON a.type_id = at.id WHERE a.id = ?;",
                 accidentMapper, id
         );
     }
 
     @Override
-    public Accident delete(Integer id) {
-        return null;
+    public void delete(Integer id) {
     }
 
     public List<Accident> getAll() {
-        return jdbc.query("SELECT a.id, a.name, text, address, at.id type_id, at.name type_name FROM accidents a JOIN atypes at ON a.type_id = at.id;",
+        return jdbc.query("SELECT a.id, a.name, text, address, at.id type_id, at.name type_name FROM accidents a " +
+                        "JOIN atypes at ON a.type_id = at.id;",
                 accidentMapper
             );
     }

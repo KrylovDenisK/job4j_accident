@@ -6,7 +6,7 @@ import ru.job4j.model.AccidentType;
 import ru.job4j.repository.StoreDAO;
 import java.util.List;
 
-@Repository
+//@Repository
 public class AccidentTypeJdbcTemplate implements StoreDAO<AccidentType> {
     private final JdbcTemplate jdbc;
 
@@ -25,8 +25,8 @@ public class AccidentTypeJdbcTemplate implements StoreDAO<AccidentType> {
     }
 
     @Override
-    public AccidentType delete(Integer id) {
-        return null;
+    public void delete(Integer id) {
+
     }
 
     @Override

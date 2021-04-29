@@ -8,7 +8,7 @@ import ru.job4j.repository.StoreDAO;
 import java.util.List;
 import java.util.Set;
 
-@Repository
+//@Repository
 public class RuleJdbcTemplate implements StoreDAO<Rule> {
     private final JdbcTemplate jdbcTemplate;
     private final RowMapper<Rule> ruleMapper;
@@ -35,8 +35,7 @@ public class RuleJdbcTemplate implements StoreDAO<Rule> {
     }
 
     @Override
-    public Rule delete(Integer id) {
-        return null;
+    public void delete(Integer id) {
     }
 
     @Override

@@ -1,13 +1,14 @@
 package ru.job4j.service;
 
+
 import ru.job4j.model.Accident;
 import ru.job4j.model.AccidentType;
 import ru.job4j.model.Rule;
 import ru.job4j.repository.StoreDAO;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+
 
 @org.springframework.stereotype.Service
 public class AccidentServiceImpl implements Service {
@@ -55,7 +56,7 @@ public class AccidentServiceImpl implements Service {
     }
 
     private Accident setRules(Accident accident, String[] ids) {
-        if (ids != null) {
+       if (ids != null) {
             accident.setRules(
                     Arrays.stream(ids)
                             .map(Integer::parseInt)
