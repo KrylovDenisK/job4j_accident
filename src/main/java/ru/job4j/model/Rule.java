@@ -1,10 +1,20 @@
 package ru.job4j.model;
 
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
+@Table(name = "rules")
 public class Rule {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
+    @Column(name = "name")
     private String name;
+
+    public Rule() {
+    }
 
     public static Rule of(int id, String name) {
         Rule rule = new Rule();

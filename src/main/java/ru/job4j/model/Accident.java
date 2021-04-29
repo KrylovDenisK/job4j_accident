@@ -1,16 +1,34 @@
 package ru.job4j.model;
 
+import javax.persistence.*;
 import java.util.Objects;
 import java.util.Set;
 
+@Entity
+@Table(name = "accidents")
 public class Accident {
-    private int id = 0;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private int id;
+    @Column(name = "name")
     private String name;
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE,
+            CascadeType.DETACH}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "type_id")
     private AccidentType type;
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE,
+            CascadeType.DETACH}, fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "accident_rule",
+            joinColumns = @JoinColumn(name = "accident_id"),
+            inverseJoinColumns = @JoinColumn(name = "rule_id")
+    )
     private Set<Rule> rules;
+    @Column(name = "text")
     private String text;
+    @Column(name = "address")
     private String address;
-
 
     public Accident() {
     }
@@ -90,14 +108,16 @@ public class Accident {
             return false;
         }
         Accident accident = (Accident) o;
-        return Objects.equals(id, accident.id)
-                && Objects.equals(name, accident.name)
-                && Objects.equals(text, accident.text)
-                && Objects.equals(address, accident.address);
+        return id == accident.id &&
+                Objects.equals(name, accident.name) &&
+                Objects.equals(type, accident.type) &&
+                Objects.equals(rules, accident.rules) &&
+                Objects.equals(text, accident.text) &&
+                Objects.equals(address, accident.address);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, text, address);
+        return Objects.hash(id, name, type, rules, text, address);
     }
 }
