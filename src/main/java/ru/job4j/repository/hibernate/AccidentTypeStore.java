@@ -11,7 +11,7 @@ import ru.job4j.repository.StoreDAO;
 import java.util.List;
 
 
-@Repository
+//@Repository
 public class AccidentTypeStore implements StoreDAO<AccidentType> {
     private final SessionFactory sessionFactory;
 

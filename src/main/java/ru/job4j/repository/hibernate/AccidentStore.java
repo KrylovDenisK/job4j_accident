@@ -9,7 +9,7 @@ import ru.job4j.repository.StoreDAO;
 import java.util.List;
 
 
-@Repository
+//@Repository
 public class AccidentStore implements StoreDAO<Accident> {
     private final SessionFactory sessionFactory;
 

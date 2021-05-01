@@ -13,12 +13,10 @@ public class Accident {
     private int id;
     @Column(name = "name")
     private String name;
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE,
-            CascadeType.DETACH}, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = {CascadeType.REFRESH, CascadeType.MERGE}, fetch = FetchType.LAZY)
     @JoinColumn(name = "type_id")
     private AccidentType type;
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE,
-            CascadeType.DETACH}, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = {CascadeType.REFRESH, CascadeType.MERGE}, fetch = FetchType.LAZY)
     @JoinTable(
             name = "accident_rule",
             joinColumns = @JoinColumn(name = "accident_id"),

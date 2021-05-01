@@ -11,7 +11,7 @@ import java.util.List;
 
 
 
-@Repository
+//@Repository
 public class RuleStore implements StoreDAO<Rule> {
     private final SessionFactory sessionFactory;
 

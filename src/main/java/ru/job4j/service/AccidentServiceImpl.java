@@ -4,21 +4,23 @@ package ru.job4j.service;
 import ru.job4j.model.Accident;
 import ru.job4j.model.AccidentType;
 import ru.job4j.model.Rule;
-import ru.job4j.repository.StoreDAO;
-import java.util.Arrays;
-import java.util.List;
+import ru.job4j.repository.data.AccidentRepository;
+import ru.job4j.repository.data.AccidentTypeRepository;
+import ru.job4j.repository.data.RuleRepository;
+
+import java.util.*;
 import java.util.stream.Collectors;
 
 
 @org.springframework.stereotype.Service
 public class AccidentServiceImpl implements Service {
-    private final StoreDAO<Accident> store;
-    private final StoreDAO<AccidentType> types;
-    private final StoreDAO<Rule> rules;
+    private final AccidentRepository store;
+    private final AccidentTypeRepository types;
+    private final RuleRepository rules;
 
 
-    public AccidentServiceImpl(StoreDAO<Accident> store, StoreDAO<AccidentType> types
-            , StoreDAO<Rule> rules) {
+    public AccidentServiceImpl(AccidentRepository store, AccidentTypeRepository types
+            , RuleRepository rules) {
         this.store = store;
         this.types = types;
         this.rules = rules;
@@ -26,27 +28,31 @@ public class AccidentServiceImpl implements Service {
 
     @Override
     public Accident save(Accident entity) {
-        return store.saveOrUpdate(entity);
+        return store.save(entity);
     }
 
     @Override
     public List<AccidentType> getTypes() {
-        return types.getAll();
+        List<AccidentType> result = new ArrayList<>();
+        types.findAll().forEach(result::add);
+        return result;
     }
 
     @Override
     public List<Accident> getAccidents() {
-        return store.getAll();
+        return store.findAll();
     }
 
     @Override
     public Accident getForUpdate(int id) {
-        return store.getById(id);
+        return store.findById(id).orElse(null);
     }
 
     @Override
     public List<Rule> getRules() {
-        return rules.getAll();
+        List<Rule> result = new ArrayList<>();
+        rules.findAll().forEach(result::add);
+        return result;
     }
 
     @Override
@@ -57,19 +63,20 @@ public class AccidentServiceImpl implements Service {
 
     private Accident setRules(Accident accident, String[] ids) {
        if (ids != null) {
-            accident.setRules(
+           accident.setRules(
                     Arrays.stream(ids)
                             .map(Integer::parseInt)
-                            .map(x -> rules.getById(x))
+                            .map(x -> rules.findById(x).orElse(null))
                             .collect(Collectors.toSet())
             );
+
         }
         return accident;
     }
 
     private Accident setAccidentType(Accident accident) {
         int acTypeId = accident.getType().getId();
-        accident.setType(types.getById(acTypeId));
+        accident.setType(types.findById(acTypeId).orElse(null));
         return accident;
     }
 }
