@@ -24,7 +24,7 @@
 <nav class="navbar navbar-fixed-top navbar-dark bg-dark">
     <a href="" class="navbar-brand">CAR ACCIDENT</a>
     <div class="navbar-nav">
-        <a class="nav-item nav-link" href="" ></a>
+        <a class="nav-item nav-link" href="<c:url value="/logout"/>">Logout: ${username}</a>
     </div>
 </nav>
 <br><br>
