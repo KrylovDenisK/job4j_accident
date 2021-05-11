@@ -11,12 +11,16 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
+
+import javax.sql.DataSource;
 
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private DataSource ds;
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
@@ -49,7 +53,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .password(passwordEncoder.encode("admin"))
                 .roles("ADMIN")
                 .build();
-        return new InMemoryUserDetailsManager(user, admin);
+        JdbcUserDetailsManager jdbcUserDetailsManager =
+                new JdbcUserDetailsManager(ds);
+        if (jdbcUserDetailsManager.userExists(user.getUsername())) {
+            jdbcUserDetailsManager.deleteUser(user.getUsername());
+        }
+
+        if (jdbcUserDetailsManager.userExists(admin.getUsername())) {
+            jdbcUserDetailsManager.deleteUser(admin.getUsername());
+        }
+        jdbcUserDetailsManager.createUser(admin);
+        jdbcUserDetailsManager.createUser(user);
+        return jdbcUserDetailsManager;
     }
 
     @Bean
