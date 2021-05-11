@@ -22,3 +22,6 @@ CREATE TABLE if NOT EXISTS accident_rule (
     rule_id           INTEGER REFERENCES rules(id),
     PRIMARY KEY (accident_id, rule_id)
 );
+
+
+
