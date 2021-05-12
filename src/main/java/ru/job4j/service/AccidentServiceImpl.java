@@ -19,8 +19,8 @@ public class AccidentServiceImpl implements Service {
     private final RuleRepository rules;
 
 
-    public AccidentServiceImpl(AccidentRepository store, AccidentTypeRepository types
-            , RuleRepository rules) {
+    public AccidentServiceImpl(AccidentRepository store, AccidentTypeRepository types,
+                               RuleRepository rules) {
         this.store = store;
         this.types = types;
         this.rules = rules;

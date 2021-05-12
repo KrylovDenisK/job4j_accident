@@ -3,6 +3,7 @@ package ru.job4j.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -21,9 +22,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private PasswordEncoder passwordEncoder;
     @Autowired
     private DataSource ds;
+    @Autowired
+    private UserDetailsService userDetailsService;
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
+                .antMatchers("/reg").permitAll()
                 .antMatchers("/**").hasAnyRole("ADMIN", "USER")
                 .and()
                 .formLogin()
@@ -42,29 +46,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public UserDetailsService userDetails() {
-        UserDetails user = User.builder()
-                .username("USER")
-                .password(passwordEncoder.encode("user"))
-                .roles("USER")
-                .build();
-        UserDetails admin = User.builder()
-                .username("ADMIN")
-                .password(passwordEncoder.encode("admin"))
-                .roles("ADMIN")
-                .build();
-        JdbcUserDetailsManager jdbcUserDetailsManager =
-                new JdbcUserDetailsManager(ds);
-        if (jdbcUserDetailsManager.userExists(user.getUsername())) {
-            jdbcUserDetailsManager.deleteUser(user.getUsername());
-        }
-
-        if (jdbcUserDetailsManager.userExists(admin.getUsername())) {
-            jdbcUserDetailsManager.deleteUser(admin.getUsername());
-        }
-        jdbcUserDetailsManager.createUser(admin);
-        jdbcUserDetailsManager.createUser(user);
-        return jdbcUserDetailsManager;
+    public DaoAuthenticationProvider userDetails() {
+        DaoAuthenticationProvider daoAuthenticationProvider
+                = new DaoAuthenticationProvider();
+        daoAuthenticationProvider.setPasswordEncoder(passwordEncoder);
+        daoAuthenticationProvider.setUserDetailsService(userDetailsService);
+        return daoAuthenticationProvider;
     }
 
     @Bean
