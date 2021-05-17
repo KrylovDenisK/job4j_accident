@@ -1,7 +1,5 @@
 package ru.job4j.service;
 
-
-import org.apache.log4j.lf5.PassingLogRecordFilter;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +17,10 @@ public class AuthoritiesService {
         this.userRepository = userRepository;
         this.encoder = encoder;
         this.roles = roles;
+    }
+
+    public boolean userVerification(String username) {
+        return userRepository.findByUsername(username) == null;
     }
 
     @Transactional

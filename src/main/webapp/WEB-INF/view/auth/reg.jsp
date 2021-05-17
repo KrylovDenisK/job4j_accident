@@ -22,6 +22,11 @@
                     <h2>Sign up</h2>
                 </div>
                 <div class="card-body">
+                    <c:if test="${not empty errorMessage}">
+                        <div style="color:red; font-weight: bold; margin: 30px 0px;">
+                                ${errorMessage}
+                        </div>
+                    </c:if>
                     <form action="<c:url value="/reg"/>" method="POST">
                         <div class="form-group">
                             <label for="username" class="control-label">Login:</label>
