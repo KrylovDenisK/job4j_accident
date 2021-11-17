@@ -24,21 +24,21 @@ CREATE TABLE if NOT EXISTS accident_rule (
 );
 
 CREATE TABLE if NOT EXISTS users (
-	id SERIAL PRIMARY KEY,
-	username VARCHAR(255) NOT NULL UNIQUE,
-	password VARCHAR(255) NOT NULL,
-	email VARCHAR(255) NOT NULL,
-	enable boolean DEFAULT TRUE
+	id SERIAL       PRIMARY KEY,
+	username        VARCHAR(255) NOT NULL UNIQUE,
+	password        VARCHAR(255) NOT NULL,
+	email           VARCHAR(255) NOT NULL,
+	enable          boolean DEFAULT TRUE
 );
 
 CREATE TABLE if NOT EXISTS roles (
-	id SERIAL PRIMARY KEY,
-	name VARCHAR(255) NOT NULL UNIQUE
+	id SERIAL       PRIMARY KEY,
+	name            VARCHAR(255) NOT NULL UNIQUE
 );
 
 CREATE TABLE if NOT EXISTS users_roles (
-	username_id INTEGER REFERENCES users(id),
-	role_id INTEGER REFERENCES roles(id),
+	username_id     INTEGER REFERENCES users(id),
+	role_id         INTEGER REFERENCES roles(id),
 	PRIMARY KEY(username_id, role_id)
 );
 
